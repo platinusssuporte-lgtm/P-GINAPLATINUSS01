@@ -47,3 +47,9 @@ next-env.d.ts
 
 # Local temp files
 temp/
+
+# Cloned-source research artifacts (not part of the Platinuss site)
+docs/research/raw/
+
+# QA/reference screenshots (dev artifacts)
+docs/design-references/
