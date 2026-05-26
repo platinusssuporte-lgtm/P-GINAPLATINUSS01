@@ -1,5 +1,3 @@
-import { WHATSAPP_URL } from "@/data/content";
-
 const TEXTURE_VERDE = "/pages/home/textures/testura_verde.webp";
 const TEXTURE_WHITE_BLUR = "/pages/home/textures/testura_white_blur.webp";
 
@@ -51,9 +49,7 @@ export function CtaFinal() {
               agora.
             </h2>
             <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
+              href="#form"
               className="btn-pulse bg-accent text-base md:text-lg font-medium text-black px-6 py-3 md:px-5 md:py-2.5 rounded-md w-fit cursor-pointer hover:bg-accent-hover"
             >
               Falar com a Platinuss

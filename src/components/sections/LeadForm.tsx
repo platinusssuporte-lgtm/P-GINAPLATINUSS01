@@ -5,9 +5,9 @@ import { ChevronDownIcon } from "@/components/icons";
 import { WHATSAPP_URL } from "@/data/content";
 
 const CAROUSEL = [
-  "/pages/home/carrosel_fotos/felipe.webp?v=2",
-  "/pages/home/carrosel_fotos/pedro.webp?v=2",
-  "/pages/home/carrosel_fotos/imagem_form.webp?v=2",
+  "/pages/home/carrosel_fotos/felipe.webp?v=3",
+  "/pages/home/carrosel_fotos/pedro.webp?v=3",
+  "/pages/home/carrosel_fotos/imagem_form.webp?v=4",
 ];
 
 function SelectField({
@@ -131,27 +131,15 @@ export function LeadForm() {
               <input aria-label="Nome da empresa" required placeholder="Nome da empresa" className="input-field" type="text" name="empresa" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-2 w-full">
-              <input aria-label="Seu cargo" required placeholder="Seu cargo" className="input-field" type="text" name="cargo" />
-              <SelectField
-                name="tamanho"
-                label="Tamanho da empresa"
-                options={[
-                  { value: "0-10", label: "0-10 funcionários" },
-                  { value: "10-20", label: "10-20 funcionários" },
-                  { value: "20-50", label: "20-50 funcionários" },
-                  { value: "50+", label: "50+ funcionários" },
-                ]}
-              />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-2 w-full">
               <SelectField
                 name="faturamento"
                 label="Faturamento mensal"
                 options={[
-                  { value: "ate-50k", label: "Até R$ 50 mil/mês" },
-                  { value: "50k-150k", label: "R$ 50 mil a R$ 150 mil/mês" },
-                  { value: "150k-500k", label: "R$ 150 mil a R$ 500 mil/mês" },
-                  { value: "500k+", label: "Acima de R$ 500 mil/mês" },
+                  { value: "ate-30k", label: "Até R$30k" },
+                  { value: "30k-50k", label: "R$30K - R$50K" },
+                  { value: "50k-100k", label: "R$50K - R$100K" },
+                  { value: "100k-300k", label: "R$100K - R$300K" },
+                  { value: "300k+", label: "Acima de R$300K" },
                 ]}
               />
               <SelectField

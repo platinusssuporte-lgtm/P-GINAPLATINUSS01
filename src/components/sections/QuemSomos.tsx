@@ -68,14 +68,14 @@ export function QuemSomos() {
           <div className="relative h-full w-[513px] shrink-0 overflow-hidden rounded-[12px]">
             {/* eslint-disable @next/next/no-img-element */}
             <img
-              alt="Equipe Algarys em conversa estratégica"
+              alt="Equipe Platinuss em conversa estratégica"
               loading="lazy"
               className="absolute left-[43px] top-[48px] h-[443px] w-[229px] rounded-[20px] object-cover"
               src="/pages/home/quem_somos/foto_1.webp"
               style={{ objectPosition: "65% 50%" }}
             />
             <img
-              alt="Apresentação da metodologia Algarys"
+              alt="Apresentação da metodologia Platinuss"
               loading="lazy"
               className="absolute left-[238px] top-[86px] h-[444px] w-[230px] rounded-[20px] object-cover -scale-x-100"
               src="/pages/home/quem_somos/foto_2.webp"
