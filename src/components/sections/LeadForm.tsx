@@ -6,7 +6,7 @@ import { WHATSAPP_URL } from "@/data/content";
 
 const CAROUSEL = [
   "/pages/home/carrosel_fotos/felipe.webp?v=3",
-  "/pages/home/carrosel_fotos/pedro.webp?v=3",
+  "/pages/home/carrosel_fotos/pedro.webp?v=5",
   "/pages/home/carrosel_fotos/imagem_form.webp?v=4",
 ];
 
