@@ -1,27 +1,3 @@
-import {
-  InstagramIcon,
-  LinkedInIcon,
-  WhatsAppIcon,
-  YouTubeIcon,
-} from "@/components/icons";
-import { WHATSAPP_URL } from "@/data/content";
-
-// TODO: troque pelos perfis reais da Platinuss Design.
-const SOCIALS = [
-  { label: "Instagram", href: "https://www.instagram.com/platinussdesign/", Icon: InstagramIcon },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/company/platinussdesign/",
-    Icon: LinkedInIcon,
-  },
-  {
-    label: "YouTube",
-    href: "https://www.youtube.com/@platinussdesign",
-    Icon: YouTubeIcon,
-  },
-  { label: "WhatsApp", href: WHATSAPP_URL, Icon: WhatsAppIcon },
-];
-
 export function Footer() {
   return (
     <footer
@@ -56,20 +32,6 @@ export function Footer() {
           <a href="#" className="text-muted hover:text-white transition-colors">
             Terms of Service
           </a>
-        </div>
-        <div className="flex items-center gap-4.25">
-          {SOCIALS.map(({ label, href, Icon }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={label}
-              className="flex size-[26.638px] items-center justify-center text-muted hover:text-white transition-colors"
-            >
-              <Icon className="social-icon" />
-            </a>
-          ))}
         </div>
       </div>
     </footer>
