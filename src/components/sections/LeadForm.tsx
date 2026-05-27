@@ -55,7 +55,31 @@ export function LeadForm() {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
+    const payload = Object.fromEntries(
+      new FormData(form).entries(),
+    ) as Record<string, string>;
+
+    // Captura UTMs da URL caso os campos ocultos estejam vazios.
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      for (const key of ["utm_source", "utm_medium", "utm_campaign"]) {
+        if (!payload[key]) payload[key] = params.get(key) ?? "";
+      }
+    }
+
+    // Abre o WhatsApp de imediato (evita bloqueio de popup)...
     window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
+
+    // ...e grava o lead em segundo plano.
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    }).catch(() => {});
+
+    form.reset();
   }
 
   return (
