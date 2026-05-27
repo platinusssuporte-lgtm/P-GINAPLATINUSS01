@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { insertLead, isSupabaseConfigured, type NewLead } from "@/lib/supabase";
+import { isZapiConfigured, notifyComercial } from "@/lib/zapi";
+import { buildLeadMessage } from "@/lib/leads-stats";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -24,11 +26,6 @@ function clean(value: unknown): string | null {
 }
 
 export async function POST(request: Request) {
-  if (!isSupabaseConfigured()) {
-    // Não derruba o fluxo do usuário: o WhatsApp já foi aberto no cliente.
-    return NextResponse.json({ ok: false, error: "not_configured" }, { status: 503 });
-  }
-
   let body: Record<string, unknown>;
   try {
     body = await request.json();
@@ -45,11 +42,29 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "empty" }, { status: 400 });
   }
 
-  try {
-    await insertLead(lead);
-    return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("[api/leads] insert error:", err);
-    return NextResponse.json({ ok: false, error: "insert_failed" }, { status: 500 });
+  // Salva no banco e avisa o comercial em paralelo. Um não derruba o outro.
+  const [insertRes, notifyRes] = await Promise.allSettled([
+    isSupabaseConfigured()
+      ? insertLead(lead)
+      : Promise.reject(new Error("supabase_not_configured")),
+    isZapiConfigured()
+      ? notifyComercial(buildLeadMessage(lead))
+      : Promise.reject(new Error("zapi_not_configured")),
+  ]);
+
+  if (insertRes.status === "rejected") {
+    console.error("[api/leads] banco:", insertRes.reason);
   }
+  if (notifyRes.status === "rejected") {
+    console.error("[api/leads] z-api:", notifyRes.reason);
+  }
+
+  const saved = insertRes.status === "fulfilled";
+  const notified = notifyRes.status === "fulfilled";
+
+  // Sucesso se ao menos uma das ações deu certo (o lead não se perde).
+  if (!saved && !notified) {
+    return NextResponse.json({ ok: false, saved, notified }, { status: 500 });
+  }
+  return NextResponse.json({ ok: true, saved, notified });
 }

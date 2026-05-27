@@ -29,6 +29,28 @@ export function label(map: Record<string, string>, key: string | null): string {
   return map[key] ?? key;
 }
 
+// Mensagem de WhatsApp enviada ao comercial quando chega um lead novo.
+export function buildLeadMessage(lead: Partial<Lead>): string {
+  const lines = [
+    "🚀 *Novo lead pelo site Platinuss*",
+    "",
+    `*Nome:* ${lead.nome ?? "—"}`,
+    `*WhatsApp:* ${lead.telefone ?? "—"}`,
+    `*E-mail:* ${lead.email ?? "—"}`,
+    `*Empresa:* ${lead.empresa ?? "—"}`,
+    `*Faturamento:* ${label(FATURAMENTO_LABELS, lead.faturamento ?? null)}`,
+    `*Já tem site?* ${label(TEM_SITE_LABELS, lead.tem_site ?? null)}`,
+    `*Maior problema:* ${lead.gargalo ?? "—"}`,
+  ];
+
+  const origem = [lead.utm_source, lead.utm_medium, lead.utm_campaign]
+    .filter(Boolean)
+    .join(" / ");
+  if (origem) lines.push("", `*Origem:* ${origem}`);
+
+  return lines.join("\n");
+}
+
 export type Bucket = { key: string; label: string; count: number };
 
 export function countBy(
