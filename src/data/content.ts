@@ -7,9 +7,9 @@ import type {
   Stat,
 } from "@/types/content";
 
-// TODO: troque pelo WhatsApp real da Platinuss Design.
+// WhatsApp oficial da Platinuss Design: (32) 9902-3390
 export const WHATSAPP_URL =
-  "https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20um%20site%20profissional%20que%20venda%20pra%20minha%20empresa.";
+  "https://wa.me/553299023390?text=Ol%C3%A1%2C%20quero%20um%20site%20profissional%20que%20venda%20pra%20minha%20empresa.";
 
 export const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "#home" },
