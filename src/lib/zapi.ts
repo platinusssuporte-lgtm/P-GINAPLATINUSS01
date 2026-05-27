@@ -6,9 +6,10 @@ const INSTANCE_ID = process.env.ZAPI_INSTANCE_ID;
 const INSTANCE_TOKEN = process.env.ZAPI_INSTANCE_TOKEN;
 const CLIENT_TOKEN = process.env.ZAPI_CLIENT_TOKEN;
 const NOTIFY_PHONE = process.env.ZAPI_NOTIFY_PHONE;
+const NOTIFY_GROUP_ID = process.env.ZAPI_NOTIFY_GROUP_ID;
 
 export function isZapiConfigured(): boolean {
-  return Boolean(INSTANCE_ID && INSTANCE_TOKEN && NOTIFY_PHONE);
+  return Boolean(INSTANCE_ID && INSTANCE_TOKEN && (NOTIFY_GROUP_ID || NOTIFY_PHONE));
 }
 
 // Aceita o número do comercial em qualquer formato e deixa só os dígitos.
@@ -17,6 +18,12 @@ function normalizePhone(raw: string): string {
   // Se vier sem código do país (10 ou 11 dígitos), assume Brasil (55).
   if (digits.length <= 11) return `55${digits}`;
   return digits;
+}
+
+// Destino do aviso: o grupo do comercial tem prioridade; senão, o número direto.
+function notifyTarget(): string {
+  if (NOTIFY_GROUP_ID) return NOTIFY_GROUP_ID.trim();
+  return normalizePhone(NOTIFY_PHONE as string);
 }
 
 export async function notifyComercial(message: string): Promise<void> {
@@ -32,7 +39,7 @@ export async function notifyComercial(message: string): Promise<void> {
     method: "POST",
     headers,
     body: JSON.stringify({
-      phone: normalizePhone(NOTIFY_PHONE as string),
+      phone: notifyTarget(),
       message,
     }),
     cache: "no-store",

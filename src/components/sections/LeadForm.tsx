@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { ChevronDownIcon } from "@/components/icons";
-import { WHATSAPP_URL } from "@/data/content";
 
 const CAROUSEL = [
   "/pages/home/carrosel_fotos/felipe.webp?v=3",
@@ -43,7 +43,9 @@ function SelectField({
 }
 
 export function LeadForm() {
+  const router = useRouter();
   const [active, setActive] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const id = setInterval(
@@ -55,6 +57,9 @@ export function LeadForm() {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+
     const form = e.currentTarget;
     const payload = Object.fromEntries(
       new FormData(form).entries(),
@@ -68,10 +73,7 @@ export function LeadForm() {
       }
     }
 
-    // Abre o WhatsApp de imediato (evita bloqueio de popup)...
-    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
-
-    // ...e grava o lead em segundo plano.
+    // Salva no banco e avisa o grupo do comercial (continua mesmo após sair da página).
     fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -79,7 +81,8 @@ export function LeadForm() {
       keepalive: true,
     }).catch(() => {});
 
-    form.reset();
+    // Leva o visitante para a página de agradecimento.
+    router.push("/obrigado");
   }
 
   return (
@@ -186,8 +189,8 @@ export function LeadForm() {
             <input type="hidden" name="utm_source" />
             <input type="hidden" name="utm_medium" />
             <input type="hidden" name="utm_campaign" />
-            <button type="submit" className="btn-primary">
-              Enviar
+            <button type="submit" className="btn-primary" disabled={submitting}>
+              {submitting ? "Enviando..." : "Enviar"}
             </button>
             <a
               href="#"
