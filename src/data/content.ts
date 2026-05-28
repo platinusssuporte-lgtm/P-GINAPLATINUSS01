@@ -87,7 +87,7 @@ export const METHOD_STEPS: MethodStep[] = [
     heading: "1. Briefing",
     description:
       "Antes de desenhar qualquer tela, entendemos seu negócio, seu público e seu objetivo. Saímos sabendo exatamente o que vai gerar venda pra você.",
-    image: "/pages/home/metodologia/odontomedic.jpg",
+    image: "/pages/home/metodologia/briefing.jpg",
   },
   {
     number: "2",
