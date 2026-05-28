@@ -179,13 +179,6 @@ export function LeadForm() {
                 ]}
               />
             </div>
-            <textarea
-              name="gargalo"
-              aria-label="Qual o maior problema do seu negócio online hoje?"
-              required
-              placeholder="Qual o maior problema do seu negócio online hoje?"
-              className="input-field min-h-[80px] resize-none w-full"
-            />
             <input type="hidden" name="utm_source" />
             <input type="hidden" name="utm_medium" />
             <input type="hidden" name="utm_campaign" />
