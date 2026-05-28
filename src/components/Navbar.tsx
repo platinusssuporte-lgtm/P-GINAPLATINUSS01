@@ -17,12 +17,13 @@ export function Navbar() {
         }}
       >
         <div className="section-px section-container flex h-full items-center justify-between">
-          <a
-            href="#home"
-            aria-label="Platinuss Design"
-            className="text-[22px] font-medium lowercase tracking-tight text-white"
-          >
-            platinuss
+          <a href="#home" aria-label="Platinuss Design" className="flex items-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo-platinuss.png"
+              alt="Platinuss Design"
+              className="h-[52px] w-auto mix-blend-screen select-none"
+            />
           </a>
           <div className="flex items-center gap-6 hidden md:flex">
             {NAV_LINKS.map((l) => (
