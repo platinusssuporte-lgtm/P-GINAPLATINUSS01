@@ -1,6 +1,3 @@
-import Link from "next/link";
-import { WHATSAPP_URL } from "@/data/content";
-
 export const metadata = {
   title: "Obrigado por preencher | Platinuss",
   description: "Recebemos seus dados. Em até 5 minutos a gente te chama no WhatsApp.",
@@ -35,23 +32,6 @@ export default function ObrigadoPage() {
             a nossa equipe vai te chamar no WhatsApp para entender seu negócio e
             montar o seu site.
           </p>
-        </div>
-
-        <div className="flex w-full flex-col gap-3 sm:flex-row sm:justify-center">
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary text-center"
-          >
-            Falar agora no WhatsApp
-          </a>
-          <Link
-            href="/"
-            className="rounded-lg border border-border px-5 py-3 text-center text-sm text-muted transition-colors hover:text-foreground"
-          >
-            Voltar para o início
-          </Link>
         </div>
       </div>
     </main>
