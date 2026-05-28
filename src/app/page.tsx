@@ -19,8 +19,15 @@ export default function Home() {
       <Hero />
       <LogosMarquee />
       <LeadForm />
-      <Stats />
-      <Servicos />
+      {/* Mobile mostra Serviços antes de Stats; desktop mantém Stats primeiro. */}
+      <div className="flex flex-col">
+        <div className="order-2 md:order-1">
+          <Stats />
+        </div>
+        <div className="order-1 md:order-2">
+          <Servicos />
+        </div>
+      </div>
       <Metodologia />
       <Objecoes />
       <QuemSomos />

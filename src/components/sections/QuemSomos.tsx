@@ -93,7 +93,7 @@ export function QuemSomos() {
         id="quem-somos-mobile"
         className="flex flex-col items-center gap-[38px] scroll-mt-25 border-y border-border bg-surface/90 px-[24px] pt-[25px] pb-[40px] backdrop-blur-[20px] md:hidden"
       >
-        <div className="animate-fade-up relative h-[343px] w-[327px] overflow-hidden rounded-[12px]">
+        <div className="animate-fade-up relative aspect-[2/3] w-[327px] overflow-hidden rounded-[12px]">
           {PHOTOS.map((src, i) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
