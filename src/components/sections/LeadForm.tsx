@@ -4,6 +4,12 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronDownIcon } from "@/components/icons";
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 const CAROUSEL = [
   "/pages/home/carrosel_fotos/felipe.webp?v=3",
   "/pages/home/carrosel_fotos/pedro.webp?v=5",
@@ -72,6 +78,9 @@ export function LeadForm() {
         if (!payload[key]) payload[key] = params.get(key) ?? "";
       }
     }
+
+    // Dispara o evento de conversão do Meta Pixel (campanha de preenchimento de formulário).
+    window.fbq?.("track", "Lead");
 
     // Salva no banco e avisa o grupo do comercial (continua mesmo após sair da página).
     fetch("/api/leads", {
